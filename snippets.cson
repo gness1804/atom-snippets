@@ -1,0 +1,646 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# https://atom.io/docs/latest/using-atom-basic-customization#cson
+
+'.source.coffee': # for this CSON language
+  'Snippet (short version)': # to create a short version of a snippet, without the language part at the top
+    'prefix': 'Snippet (short version)'
+    'body': """
+      'Snippet Name': # my comments
+        'prefix': 'Snippet Trigger'
+        'body': 'Hello World!'
+    """
+
+##########################
+
+'.text.html.basic': # for HTML documents
+  'canvas_expanded': # expanded version of the "canvas" snippet that includes a script link to canvas script file
+    'prefix': 'canvas_expanded'
+    'body': """
+      <canvas id="canvas" width="300" height="300"></canvas>
+      <script src="canvas.js"></script>
+    """
+  'CSS .css file': # to create a new link to my .css file
+    'prefix': 'CSS .css file'
+    'body': """
+      <link rel="stylesheet" style="text/css" href="$1.css"/>
+    """
+  'data-role': # for the "data-role" attribute in jQuery Mobile
+    'prefix': 'data-role'
+    'body': 'data-role="$1"'
+  'dropdown_slidedown': # to create menu items that use a dropdown menu managed in jQuery
+    'prefix': 'dropdown_slidedown'
+    'body': """
+      <ul class="mainList">
+        <div class="dropdown_container">
+          <li>The Most Important Links</li>
+            <div class="dropdown_menu">
+              <a href="">Item 1</a>
+              <a href="">Item 2</a>
+            </div>
+        </div>
+        <div class="dropdown_container">
+          <li>Related Links</li>
+            <div class="dropdown_menu">
+              <a href="">Item 1</a>
+              <a href="">Item 2</a>
+          </div>
+        </div>
+        <div class="dropdown_container">
+          <li>Yet More Links</li>
+            <div class="dropdown_menu">
+              <a href="">Item 1</a>
+              <a href="">Item 2</a>
+            </div>
+        </div>
+      </ul>
+    """
+  'favicon2': # to add a favicon to the page
+    'prefix': 'favicon2'
+    'body': '<link rel="icon" href="favicon.ico" type="image/x-icon">'
+  'grahamnessler.com': # to link to my website
+    'prefix': 'grahamnessler.com'
+    'body': 'http://www.grahamnessler.com'
+  'href': # href with space for link and opens in new window
+    'prefix': 'href'
+    'body': 'href="$1" target="_blank"'
+  'html_expanded': # an expanded HTML skeleton
+    'prefix': 'html_expanded'
+    'body': """
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <!--If I want to keep the page from showing up in search engine results, use the "nosearch" snippet here. -->
+          <meta name="viewport" content="width=device-width"/>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+          <script src="script.js"></script>
+          <link rel="stylesheet" style="text/css" href="reset.css"/>
+          <!--Google fonts link if wanted, available from https://fonts.google.com -->
+          <link rel="icon" href="favicon.ico" type="image/x-icon">
+          <link rel="stylesheet" style="text/css" href="style.css"/>
+          <title></title>
+        </head>
+        <body>
+
+        </body>
+      </html>
+    """
+  'JavaScript .js file': # to create a new link to my .js file
+    'prefix': 'JavaScript .js file'
+    'body': """
+      <script src="$1.js"></script>
+    """
+  'jQuery mobile': #CDN requirements to use jQuery Mobile
+    'prefix': 'jquery mobile'
+    'body': """
+      <!-- Include meta tag to ensure proper rendering and touch zooming -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Include jQuery Mobile stylesheets -->
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+      <!-- Include the jQuery library -->
+      <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <!-- Include the jQuery Mobile library -->
+      <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    """
+  'jQuery vanilla': # the CDN for vanilla jQuery
+    'prefix': 'jQuery vanilla'
+    'body': """
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    """
+  'legal_personalized': # personalized version of the boilerplate legal notice
+    'prefix': 'legal_personalized'
+    'body': 'Copyright (c) 2016 Graham Nessler. All Rights Reserved.'
+  'media_query': # meta tag to enable media query
+    'prefix': 'media_query'
+    'body': """
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=true;">
+    """
+  'nosearch': # to keep the page from showing up in search engine results
+    'prefix': 'nosearch'
+    'body': '<meta name="robots" content="noindex"/>'
+  'p5.js': # link to enable p5.js
+    'prefix': 'p5.js'
+    'body': """
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    """
+  'Snippet Name': # my comments
+    'prefix': 'Snippet Trigger'
+    'body': 'Hello World!'
+  'radio': # radio button
+    'prefix': 'radio'
+    'body': """
+      <input type="radio" name="name" value="value" id="$1">
+      <label for="$1">Label Name</label>
+    """
+  'reset': # to insert reset.css link
+    'prefix': 'reset'
+    'body': """
+      <link rel="stylesheet" style="text/css" href="reset.css"/>
+    """
+
+##########################
+
+'.source.js': # for JavaScript documents
+  'addEventListener': # for JS addEventListener
+    'prefix': 'addEventListener'
+    'body': """
+      addEventListener('event', function () {
+
+        });
+    """
+  'alert': # the JS "alert" function
+    'prefix': 'alert'
+    'body': 'alert("$1");'
+  'animate': # the jQuery "animate()" method
+    'prefix': 'animate'
+    'body': """
+      animate({cssProp: "value", cssProp: "value"}, speed, callbackFxn); // be sure to give the targeted element the position relative, absolute, or fixed
+    """
+  'array-of-numbers': # to create a blank array with spaces for numbers
+    'prefix': 'array-of-numbers'
+    'body': '[$1,,,,];'
+  'array-of-text': # to create a new blank array w blank text lines
+    'prefix': 'array-of-text'
+    'body': '["$1", "", "", "", ""];'
+  'attr_simple': # for the jQuery .attr() method (simple form)
+    'prefix': 'attr_simple'
+    'body': 'attr("attribute", "attributeValue");'
+  'attr_complex': # for the jQuery .attr() method (complex form)
+    'prefix': 'attr_complex'
+    'body': """
+      attr({
+        "attribute" : "attributeValue",
+        "attribute" : "attributeValue"
+    });
+    """
+  'bezier_curve': # to draw a bezier curve
+    'prefix': 'bezier_curve'
+    'body': """
+      draw$1.beginPath();
+      draw.moveTo(xstart, ystart); //starting point of bezier curve
+      draw.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, xend, yend);
+      draw.stroke();
+      draw.closePath();
+    """
+  'border-test': # border test for jQuery
+    'prefix': 'border-test'
+    'body': """
+      $(document).on("keydown", function(key) {
+        if (key.which === 66) { // "B"
+          $(".testing").toggleClass("border-test");
+          }
+        });
+    """
+  'canvas_2d_base_script': # base script to set up a 2d canvas drawing
+    'prefix': 'canvas_2d_base_script'
+    'body': """
+      var canvas$1 = document.getElementById("canvas");
+      var draw = canvas.getContext("2d");
+    """
+  'circle_in_canvas': # to create a circle in canvas
+    'prefix': 'circle_in_canvas'
+    'body': """
+      draw$1.beginPath();
+      draw.arc(xcenter, ycenter, r, 0, 2*Math.PI);
+      draw.strokeStyle = "//color or style";
+      draw.fillStyle = "//color or style";
+      draw.fill(); //or "draw.stroke()" for an unfilled circle
+      draw.closePath(); //needed if not using "fill()"
+    """
+  'constructor': # to create a new blank constructor function
+    'prefix': 'constructor'
+    'body': """
+      function Name (arg1, arg2) {
+        this.property = "value(text)";
+        this.property = "value(text)";
+        this.property = "value(text)";
+        this.property = value(number);
+        this.property = "value(text)";
+        this.arg1 = arg1;
+        this.arg2 = arg2;
+      };
+    """
+  '.css': # jQuery's .css()
+    'prefix': '.css'
+    'body': """
+      css({
+        cssProperty: 'value',
+        cssProperty: 'value'
+        });
+    """
+  'dropdown_slidedown': # to manage the dropdown menus for the above HTML
+    'prefix': 'dropdown_slidedown'
+    'body': """
+     $(".dropdown_menu").hide();
+      $(".dropdown_container").hover(function () {
+        $(".dropdown_menu").slideDown();
+        }, function () {
+          $(".dropdown_menu").slideUp();
+          });
+    """
+  'ellipse': # ellipse for p5js
+    'prefix': 'ellipse'
+    'body': """
+      ellipse(xstart, ystart, width, height);
+    """
+  'function2': # workaround to emulate the default "function" snippet
+    'prefix': 'function2'
+    'body': """
+      function $1name () {
+
+      };
+    """
+  'getElementById': # slight revised form for getElementById
+    'prefix': 'getElementById'
+    'body': 'getElementById("$1")'
+  'image_in_canvas': # to insert an image into canvas
+    'prefix': 'image_in_canvas'
+    'body': """
+      window.onload = function () {
+        var $1imageName= document.getElementById("imageId");
+        draw.drawImage(imageName, x, y);
+      };
+    """
+  'jQuery-basic-skeleton': # the basic setup for jQuery
+    'prefix': 'jQuery-basic-skeleton'
+    'body': """
+      $(document).ready(function () {
+        $1
+      }); //end of jQuery body
+    """
+  'line_in_canvas': # to create a line in canvas
+    'prefix': 'line_in_canvas'
+    'body': """
+      //draw.beginPath(); if starting a shape or to protect lines from other parts of the picture
+      draw$1.moveTo(xstart, ystart);
+      draw.lineTo(xend, yend); //repeat this as often as needed to draw shapes
+      draw.strokeStyle = "//color or style of the line";
+      draw.stroke(); //for simple lines
+      //draw.fill(); if filling a shape; can also precede this with "draw.fillStyle = ''"
+      //draw.closePath(); //unless drawfill() is used
+    """
+  'log2': # workaround to emulate the default "log" snippet
+    'prefix': 'log2'
+    'body': 'console.log($1)'
+  'mobile_redirect': # redirects user to a mobile site if their screen is smaller than 500 px
+    'prefix': 'mobile_redirect'
+    'body': """
+      function testWin() { //redirect to mobile site; in most cases, I should add this function name to an "onload" attribute in the HTML body
+        var w = window.outerWidth;
+        if (w < 500) {
+          window.location.replace("$1.html");
+        }
+      };
+    """
+  'object_w_properties': # to create a blank object block with several property and value templates
+    'prefix': 'object_w_properties'
+    'body': """
+      {
+        property: "value(text)",
+        property: "value(text)",
+        property: value(number),
+        property: "value(text)",
+        property: "value(text)",
+      };
+    """
+  'offset_return': # used to just return corrdinates using "offset()", rather than set the coord.
+    'prefix': 'offset_return'
+    'body': 'offset().left|.top| '
+  'offset_set_coord': # to assign new coordinates to top and/or left of object using "offset()"
+    'prefix': 'offset_set_coord'
+    'body': 'offset({top: 000, left: 000});'
+  'on_mult_handlers': # a more complex template for the jQuery ".on" method featuring multiple event handlers
+    'prefix': 'on_mult_handlers'
+    'body': """
+      on({
+        event: function() {
+          //function body for handler
+        },
+        event: function() {
+          //function body for handler
+        },
+        event: function() {
+          //function body for handler
+        }
+      });
+    """
+  'on_simplified': # a simplified template for the jQuery ".on" method
+    'prefix': 'on_simplified'
+    'body': """
+      on("event1 event2", {optional data to pass to function}, function() {
+        //function body
+        });
+    """
+  'p5js_setup': # basic setup for p5js
+    'prefix': 'p5js_setup'
+    'body': """
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+    }
+
+    function draw() {
+
+    }
+    """
+  'pinpoint': # to calculate the position of a point in a canvas object
+    'prefix': 'pinpoint'
+    'body': '(outputX - objFromLeft), (outputY - objFromTop)'
+  'quadratic_curve': # to draw a quadratic curve
+    'prefix': 'quadratic_curve'
+    'body': """
+      draw.beginPath();
+      draw.moveTo(xstart, ystart); // the starting point of the curve
+      draw.quadraticCurveTo(cpx, cpy, xend, yend);
+      draw.stroke();
+      draw.closePath();
+    """
+  'rect': # rectangle in p5js
+    'prefix': 'rect'
+    'body': """
+      rect(xstart, ystart, width, height);
+    """
+  'rectangle_in_canvas': # to create a rectangle in canvas
+    'prefix': 'rectangle_in_canvas'
+    'body': """
+      draw$1.fillStyle = "//color or style that fills the rectangle";
+      draw.fillRect(xstart, ystart, xwidth, yheight);
+    """
+  'setAttribute': # to set the attribute of an element
+    'prefix': 'setAttribute'
+    'body': """
+      setAttribute("attribue", "value");
+    """
+  'setInterval': # for setInterval()
+    'prefix': 'setInterval'
+    'body': """
+      setInterval(function () {
+        //function body
+      }, timer, param1, param2);
+    """
+  'setTimeout': # for setTimeout()
+    'prefix': 'setTimeout'
+    'body': """
+      setTimeout(function() {}, timer, param1, param2);
+    """
+  'sort': # sort function
+    'prefix': 'sort'
+    'body': """
+      sort(function (a, b) {return a - b});
+    """
+  'sumArrayItems': # to add up all the numbers in an array
+    'prefix': 'sumArrayItems'
+    'body': """
+      array.reduce(function (a, b) {
+        return a + b;
+      }, 0);
+    """
+  'test': # test
+    'prefix': 'test'
+    'body': """
+      describe("functionName", function () {
+        it("should do X", function () {
+          assert.strictEqual(functionName(arg1, arg2), desiredResult);
+          assert.strictEqual(functionName(arg1, arg2), desiredResult);
+        });
+      });
+    """
+  'text_in_canvas': # to create text in canvas
+    'prefix': 'text_in_canvas'
+    'body': """
+      draw$1.font = "sizepx fontname";
+      draw.fillStyle = "//color or style that fills the text, if wanted";
+      draw.textAlign = "";
+      draw.fillText("text", x, y); //can also use "draw.strokeText("text", x, y)" to create text without a fill
+    """
+  'today': # insert the current date in a readable format
+    'prefix': 'today'
+    'body': 'new Date().toDateString()'
+
+####################################
+
+'.source.css': # for CSS documents
+  'auto_fit': # the trick to center an object on the page
+    'prefix': 'auto_fit'
+    'body': """
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    """
+  'border-box': # inserts border-box to control for margin and padding issues
+    'prefix': 'border-box'
+    'body': """
+      html, body {
+        box-sizing: border-box;
+      }
+
+      *,
+      *:after,
+      *:before {
+        box-sizing: inherit;
+      }
+    """
+  'border_standard': # standard border
+    'prefix': 'border_standard'
+    'body': 'border: 1px solid black;'
+  'border_test': # temp border for testing purposes
+    'prefix': 'border_test'
+    'body': 'border: 1px dotted red; /* temp */'
+  'center': # center the element on the page
+    'prefix': 'center'
+    'body': """
+      margin: auto;
+      width: $1;
+    """
+  'clearfix': # the clearfix
+    'prefix': 'clearfix'
+    'body': """
+      .clearfix:after {
+        content:" ";
+        display:table;
+        clear:both;
+      }
+    """
+  'giant_monitor': # media query for giant monitors
+    'prefix': 'giant_monitor'
+    'body': """
+      @media screen and (min-width: 1500px) { /* for giant monitors */
+        element1 {}
+        element2 {}
+      }
+    """
+  'keyframes_percentages': # expanded version of default @keyframes snippet, using percentages
+    'prefix': 'keyframes_percentages'
+    'body': """
+      @keyframes $1name {
+        0%   {css-prop: value; css-prop: value}
+        25%  {css-prop: value; css-prop: value}
+        50%  {css-prop: value; css-prop: value}
+        100% {css-prop: value; css-prop: value}
+      }
+    """
+  'keyframes_simple': # expanded version of default @keyframes snippet
+    'prefix': 'keyframes_simple'
+    'body': """
+      @keyframes $1name {
+        from {css-prop: value; css-prop: value}
+        to {css-prop: value; css-prop: value}
+      }
+    """
+  'linear_gradient': # linear gradient
+    'prefix': 'linear_gradient'
+    'body': 'background: linear-gradient(to direction, color1, color2);'
+  'link_standard': # my standard settings for links
+    'prefix': 'link_standard'
+    'body': """
+      a:link {
+        text-decoration: none;
+        color: rgb(64, 37, 226);
+      }
+
+      a:visited {
+        color: rgb(232, 44, 219);
+      }
+
+      a:hover {
+        color: red;
+        font-style: italic;
+      }
+    """
+  'margin-four': # short form for margin entry
+    'prefix': 'margin-four'
+    'body': 'margin: top right bottom left;'
+  'margin-two': # short form for margin entry
+    'prefix': 'margin-two'
+    'body': 'margin: top-bottom left-right;'
+  'padding_four': # short form for padding entry
+    'prefix': 'padding_four'
+    'body': 'padding: top right bottom left;'
+  'padding-two': # short form for padding entry
+    'prefix': 'padding-two'
+    'body': 'padding: top-bottom left-right;'
+  'pseudo-link': # marks up a piece of text like a link, even though it's not a true link.
+    'prefix': 'pseudo-link'
+    'body': """
+      .pseudo-link {
+        color: rgb(64, 37, 226);
+      }
+
+      .pseudo-link:hover {
+      	color: red;
+        font-style: italic;
+      	cursor: pointer;
+      }
+    """
+  'reset': # code for css reset
+    'prefix': 'reset'
+    'body': """
+      /* http://meyerweb.com/eric/tools/css/reset/
+         v2.0 | 20110126
+         License: none (public domain)
+      */
+
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed,
+      figure, figcaption, footer, header, hgroup,
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video {
+      	margin: 0;
+      	padding: 0;
+      	border: 0;
+      	font-size: 100%;
+      	font: inherit;
+      	vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article, aside, details, figcaption, figure,
+      footer, header, hgroup, menu, nav, section {
+      	display: block;
+      }
+      body {
+      	line-height: 1;
+      }
+      ol, ul {
+      	list-style: none;
+      }
+      blockquote, q {
+      	quotes: none;
+      }
+      blockquote:before, blockquote:after,
+      q:before, q:after {
+      	content: '';
+      	content: none;
+      }
+      table {
+      	border-collapse: collapse;
+      	border-spacing: 0;
+      }
+
+    """
+  'smartphone': # media query for smartphone
+    'prefix': 'smartphone'
+    'body': """
+      @media screen and (max-width: 500px) { /* for smartphones */
+        element1 {}
+        element2 {}
+      }
+    """
+  'smartphone-and-tablet': # media query for smartphones and tablets
+    'prefix': 'smartphone-and-tablet'
+    'body': """
+      @media screen and (max-width: 800px) { /* for smartphones and tablets */
+        element1 {}
+        element2 {}
+      }
+    """
+  'tablet': #  media query for tablets
+    'prefix': 'tablet'
+    'body': """
+      @media screen and (min-width: 501px) and (max-width: 800px) { /* for tablets */
+        element1 {}
+        element2 {}
+      }
+    """
+  'text-replacement': # replace text with an image
+    'prefix': 'text-replacement'
+    'body': """
+      text-indent: -9999px;
+      background: url($1) no-repeat;
+      height: height;
+      width: width;
+    """
+  'vertical-alignment': # code to align element vertically
+    'prefix': 'vertical-alignment'
+    'body': """
+      .element {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    """
