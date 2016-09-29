@@ -92,15 +92,15 @@
           <!--If I want to keep the page from showing up in search engine results, use the "nosearch" snippet here. -->
           <meta name="viewport" content="width=device-width"/>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-          <script src="script.js"></script>
-          <link rel="stylesheet" style="text/css" href="reset.css"/>
+          <!-- reset.css or normalize.css -->
           <!--Google fonts link if wanted, available from https://fonts.google.com -->
           <link rel="icon" href="favicon.ico" type="image/x-icon">
-          <link rel="stylesheet" style="text/css" href="style.css"/>
+          <link rel="stylesheet" style="text/css" href="styles.css"/>
           <title></title>
         </head>
         <body>
 
+        <script src="scripts.js"></script>
         </body>
       </html>
     """
@@ -133,6 +133,12 @@
     'prefix': 'media_query'
     'body': """
       <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=true;">
+    """
+  'normalize': # for normalize.css
+    'prefix': 'normalize'
+    'body': """
+      <link rel="stylesheet" style="text/css" href="
+      https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css"/>
     """
   'nosearch': # to keep the page from showing up in search engine results
     'prefix': 'nosearch'
@@ -373,6 +379,15 @@
       draw.stroke();
       draw.closePath();
     """
+  'random-number-generator': # random number generator allowing one to set a min and max
+    'prefix': 'random-number-generator'
+    'body': """
+      function random(min, max) {
+        let min = min;
+        let max = max;
+        return Math.floor(Math.random() * (max - min) + min);
+      }
+    """
   'rect': # rectangle in p5js
     'prefix': 'rect'
     'body': """
@@ -405,6 +420,11 @@
     'prefix': 'sort'
     'body': """
       sort(function (a, b) {return a - b});
+    """
+  'splice': # splice method to add or remove stuff from arrays
+    'prefix': 'splice'
+    'body': """
+      splice(indexPositionToStart, numberOfItemsToAddOrRemove, itemToAdd, itemToAdd);
     """
   'sumArrayItems': # to add up all the numbers in an array
     'prefix': 'sumArrayItems'
