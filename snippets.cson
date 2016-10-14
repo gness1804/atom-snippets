@@ -24,9 +24,9 @@
   'Snippet (short version)': # to create a short version of a snippet, without the language part at the top
     'prefix': 'Snippet (short version)'
     'body': """
-      'Snippet Name': # my comments
-        'prefix': 'Snippet Trigger'
-        'body': 'Hello World!'
+      '$1': # my comments
+        'prefix': '$1'
+        'body': $2
     """
 
 ##########################
@@ -73,6 +73,16 @@
         </div>
       </ul>
     """
+  'enzyme-test-basics': # my comments
+    'prefix': 'enzyme-test-basics'
+    'body': """
+      var expect = require('chai').expect;
+      const React = require('react');
+      const App   = require('../lib/components/App');
+      //require in other files as needed
+      require('locus');
+      import {shallow, mount, render} from 'enzyme';
+    """
   'favicon2': # to add a favicon to the page
     'prefix': 'favicon2'
     'body': '<link rel="icon" href="favicon.ico" type="image/x-icon">'
@@ -86,7 +96,7 @@
     'prefix': 'html_expanded'
     'body': """
       <!DOCTYPE html>
-      <html>
+      <html lang="en">
         <head>
           <meta charset="utf-8">
           <!--If I want to keep the page from showing up in search engine results, use the "nosearch" snippet here. -->
@@ -143,6 +153,9 @@
   'nosearch': # to keep the page from showing up in search engine results
     'prefix': 'nosearch'
     'body': '<meta name="robots" content="noindex"/>'
+  'option': # option contain for dropdown menu
+    'prefix': 'option'
+    'body': '<option>$1</option>'
   'p5.js': # link to enable p5.js
     'prefix': 'p5.js'
     'body': """
@@ -159,6 +172,9 @@
     'body': """
       <link rel="stylesheet" style="text/css" href="reset.css"/>
     """
+    'tab-index': # tab-index 0 for accessibility
+      'prefix': 'tab-index'
+      'body': 'tabindex="0"'
 
 ##########################
 
@@ -250,6 +266,16 @@
         cssProperty: 'value'
         });
     """
+  'describe': # "describe" for tests
+    'prefix': 'describe'
+    'body': """
+      describe("$1", function () {
+        it("should $2", function () {
+          $3
+          assert.strictEqual("dogs", "cats");
+        }); //end of $2
+      }); //end of describe $1
+    """
   'dropdown_slidedown': # to manage the dropdown menus for the above HTML
     'prefix': 'dropdown_slidedown'
     'body': """
@@ -265,12 +291,26 @@
     'body': """
       ellipse(xstart, ystart, width, height);
     """
+  'es6-disable-warnings': # to disable es6 warnings in es6. Need to create a file called .jshintrc in the root directory of my project
+    'prefix': 'es6-disable-warnings'
+    'body': """
+      {
+        "esversion": 6
+      }
+    """
   'function2': # workaround to emulate the default "function" snippet
     'prefix': 'function2'
     'body': """
-      function $1name () {
-
-      };
+      function $1 ($2) {
+        $3
+      } //end of $1
+    """
+  'get-ajax': # "get" in ajax with jQuery
+    'prefix': 'get-ajax'
+    'body': """
+      $.get( "/whereToGetDataFrom", function( data ) {
+        //do something with data
+        });
     """
   'getElementById': # slight revised form for getElementById
     'prefix': 'getElementById'
@@ -282,6 +322,14 @@
         var $1imageName= document.getElementById("imageId");
         draw.drawImage(imageName, x, y);
       };
+    """
+  'it-should': # the "it" function for testing
+    'prefix': 'it-should'
+    'body': """
+      it("should $1", function () {
+        $2
+        assert.strictEqual("dogs", "cats");
+      }); //end of $1
     """
   'jQuery-basic-skeleton': # the basic setup for jQuery
     'prefix': 'jQuery-basic-skeleton'
@@ -367,6 +415,13 @@
   'pinpoint': # to calculate the position of a point in a canvas object
     'prefix': 'pinpoint'
     'body': '(outputX - objFromLeft), (outputY - objFromTop)'
+  'post-ajax': # an ajax post function with jQuery
+    'prefix': 'post-ajax'
+    'body': """
+      $.post("/whereToPost", {key: value, key2: value2}).then(function (response) {
+        //do something with response
+      }); //end of post
+    """
   'quadratic_curve': # to draw a quadratic curve
     'prefix': 'quadratic_curve'
     'body': """
@@ -413,6 +468,24 @@
     'body': """
       setTimeout(function() {}, timer, param1, param2);
     """
+  'setup.js': # for setup.js file (testing in enzyme)
+    'prefix': 'setup.js'
+    'body': """
+      require('babel-register')({
+        presets: ["react", "es2015"]
+      });
+
+      require('babel-polyfill');
+
+      //we need an instance of the document
+      global.document = require('jsdom').jsdom(
+        "<html>HTML from index.html</html>"
+      );
+
+      //and an instance of the window
+      global.window = document.defaultView;
+      global.navigator = window.navigator;
+    """
   'sort': # sort function
     'prefix': 'sort'
     'body': """
@@ -430,16 +503,6 @@
         return a + b;
       }, 0);
     """
-  'test': # test
-    'prefix': 'test'
-    'body': """
-      describe("functionName", function () {
-        it("should do X", function () {
-          assert.strictEqual(functionName(arg1, arg2), desiredResult);
-          assert.strictEqual(functionName(arg1, arg2), desiredResult);
-        });
-      });
-    """
   'text_in_canvas': # to create text in canvas
     'prefix': 'text_in_canvas'
     'body': """
@@ -451,8 +514,106 @@
   'today': # insert the current date in a readable format
     'prefix': 'today'
     'body': 'new Date().toDateString()'
+  'webpack-config-js': # to set up the webpack.config.js file
+    'prefix': 'webpack-config-js'
+    'body': """
+    const path = require('path');
+
+    module.exports = {
+      entry: {
+        main: "./lib/index.js",
+        test: "mocha!./test/index.js"
+      },
+      output: {
+        path: __dirname,
+        filename: "[name].bundle.js"
+      },
+      module: {
+        loaders: [
+          { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' },
+          { test: /\.css$/, loader: "style!css" },
+          { test: /\.scss$/, loader: "style!css!sass" }
+        ]
+      },
+      resolve: {
+        extensions: ['', '.js', '.json', '.scss', '.css']
+      }
+    };
+    """
 
 ####################################
+
+'.source.json': # for JSON documents
+  'webpack-package-json-dependencies': # my comments
+    'prefix': 'webpack-package-json-dependencies'
+    'body': """
+      "devDependencies": {
+        "babel": "^6.5.2",
+        "babel-core": "^6.14.0",
+        "babel-loader": "^6.2.5",
+        "babel-polyfill": "^6.13.0",
+        "babel-preset-es2015": "^6.14.0",
+        "babel-preset-react": "^6.11.1",
+        "chai": "^3.5.0",
+        "css-loader": "^0.25.0",
+        "enzyme": "^2.4.1",
+        "html-webpack-plugin": "^2.22.0",
+        "jquery": "^3.1.0",
+        "jshint": "^2.9.3",
+        "jsdom": "^9.6.0",
+        "locus": "^1.2.0",
+        "mocha": "^3.0.2",
+        "mocha-loader": "^1.0.0",
+        "node-sass": "^3.9.0",
+        "react-addons-test-utils": "^15.3.1",
+        "sass-loader": "^4.0.1",
+        "style-loader": "^0.13.1",
+        "webpack": "^1.13.2",
+        "webpack-dev-server": "^1.15.1"
+        },
+      "dependencies": {
+        "react": "^15.3.1",
+        "react-dom": "^15.3.1"
+      }
+    """
+  'webpack-package-json-scripts': # my comments
+    'prefix': 'webpack-package-json-scripts'
+    'body': """
+      "scripts": {
+        "start": "webpack-dev-server --hot --inline",
+        "build": "webpack",
+        "test": "mocha", //add '--require test/helpers/setup.js' if running enzyme tests
+        "sel": "java -jar selenium-server-standalone-2.53.0.jar",
+        "feature": "wdio wdio.conf.js"
+      },
+    """
+
+####################################
+
+'.source.js.jsx': ####for react
+  'react-basic-constructor':
+    'prefix':'react-basic-constructor'
+    'body': """
+      const React = require('react');
+      const ReactDOM = require('react-dom');
+      //require any other jsx files needed
+
+      class $1 extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {location: props.$2};
+        }
+
+        render () {
+          return (
+
+          );
+        }
+      } //end of $1
+
+      module.exports = $1;
+    """
+#####################################
 
 '.source.css': # for CSS documents
   'auto_fit': # the trick to center an object on the page
