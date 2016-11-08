@@ -24,7 +24,7 @@
   'Snippet (short version)': # to create a short version of a snippet, without the language part at the top
     'prefix': 'Snippet (short version)'
     'body': """
-      '$1': # my comments
+      '$1':
         'prefix': '$1'
         'body': $2
     """
@@ -49,7 +49,7 @@
   'dropdown_slidedown': # to create menu items that use a dropdown menu managed in jQuery
     'prefix': 'dropdown_slidedown'
     'body': """
-      <ul class="mainList">
+      <ul>
         <div class="dropdown_container">
           <li>The Most Important Links</li>
             <div class="dropdown_menu">
@@ -73,7 +73,7 @@
         </div>
       </ul>
     """
-  'enzyme-test-basics': # my comments
+  'enzyme-test-basics':
     'prefix': 'enzyme-test-basics'
     'body': """
       var expect = require('chai').expect;
@@ -99,13 +99,11 @@
       <html lang="en">
         <head>
           <meta charset="utf-8">
-          <!--If I want to keep the page from showing up in search engine results, use the "nosearch" snippet here. -->
           <meta name="viewport" content="width=device-width"/>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-          <!-- reset.css or normalize.css -->
-          <!--Google fonts link if wanted, available from https://fonts.google.com -->
-          <link rel="icon" href="favicon.ico" type="image/x-icon">
-          <link rel="stylesheet" style="text/css" href="styles.css"/>
+          <link rel="stylesheet" style="text/css" href="
+          https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css"/>
+          <!-- <link rel="stylesheet" style="text/css" href="styles.css"/> -->
           <title></title>
         </head>
         <body>
@@ -200,6 +198,18 @@
   'array-of-text': # to create a new blank array w blank text lines
     'prefix': 'array-of-text'
     'body': '["$1", "", "", "", ""];'
+  'arrow-function': # arrow function for es6
+    'prefix': 'arrow-function'
+    'body': """
+      ($1) => {
+        $2
+      }
+    """
+  'assert.strictEqual':
+    'prefix': 'assert.strictEqual'
+    'body': """
+      assert.strictEqual("dogs", "cats");
+    """
   'attr_simple': # for the jQuery .attr() method (simple form)
     'prefix': 'attr_simple'
     'body': 'attr("attribute", "attributeValue");'
@@ -269,28 +279,64 @@
   'describe': # "describe" for tests
     'prefix': 'describe'
     'body': """
-      describe("$1", function () {
-        it("should $2", function () {
+      describe("$1", ()=>{
+        it("should $2", ()=>{
           $3
           assert.strictEqual("dogs", "cats");
-        }); //end of $2
-      }); //end of describe $1
+        });
+      });
     """
   'dropdown_slidedown': # to manage the dropdown menus for the above HTML
     'prefix': 'dropdown_slidedown'
     'body': """
      $(".dropdown_menu").hide();
-      $(".dropdown_container").hover(function () {
-        $(".dropdown_menu").slideDown();
-        }, function () {
-          $(".dropdown_menu").slideUp();
-          });
+
+     $(".dropdown_container").hover(function (){
+        $(this).children().fadeIn(500);
+     });
+
+     $(".dropdown_container").mouseleave(()=>{
+        $(".dropdown_menu").fadeOut(500);
+     });
     """
   'ellipse': # ellipse for p5js
     'prefix': 'ellipse'
     'body': """
       ellipse(xstart, ystart, width, height);
     """
+  'es6 constant':
+    'prefix':'es6Const'
+    'body':'${1:/* replace var with let to declare a variable, but limit the variable’s\n\tscope to only the current code block */}\nconst ${2:constName} = ${3:constValue};${4}'
+  'es6 arrow function':
+    'prefix':'es6ArrowFunction'
+    'body':'/* Arrows are a function shorthand using the => syntax. Unlike functions,\n\tarrows share the same lexical this as their surrounding code. If an arrow\n\tis inside another function, it shares the “arguments” variable of its\n\tparent function. Arrow functions are commonly used for iteration methods */\n\n// Arrow functions also include an implicit .bind(this)\n// In these examples the => is relacing the callback function()\n// Note that \' () => \' is an anonymous arrow function\n\n// Expression bodies\n\tvar odds = evens.map(v => v + 1);\n\tvar nums = evens.map((v, i) => v + i);\n\n// Statement bodies\n\tnums.forEach(v => {\n\tif (v % 5 === 0)\n\t\tfives.push(v);\n\t});'
+  'es6 class':
+    'prefix':'es6Class'
+    'body':'${1:/* ES2015 classes are a simple sugar over the prototype-based OO pattern.\n\tHaving a single convenient declarative form makes class patterns easier\n\tto use, and encourages interoperability. Classes support prototype-based\n\tinheritance, super calls, instance and static methods and constructors. */}\n\n${2:var} ${3:Polygon} = class ${3:Polygon} {\n\tconstructor(${4:arg1}, ${5:ar2}) {\n\t\tthis.${4:arg1} = ${4:arg1};\n\t\tthis.${5:ar2} = ${5:ar2};${6}\n\t}\n};${7}'
+  'es6 class in depth':
+    'prefix':'es6ClassInDepth'
+    'body':'/* ES2015 classes are a simple sugar over the prototype-based OO pattern.\n\tHaving a single convenient declarative form makes class patterns easier\n\tto use, and encourages interoperability. Classes support prototype-based\n\tinheritance, super calls, instance and static methods and constructors. */\n\n//new Polygon(20,10)\n//anything that is not part of the constuctor is a prototype method\n//note that you don\'t have to do \'movePolygon = function()\' this is also true for ES6 object literals\nclass Polygon {\n\tconstructor(height, width) {\n\t\tthis.height = height\n\t\tthis.width = width\n\t}\n\tping() {\n\t\tconsole.log(\'ping\')\n\t\t// this is a prototype method\n\t}\n}\n\n// new HyperPolygon({width:10, height:20})\n// you can also use ES6 parameter deconstruction and short circuits in class constructors\n// note that you no longer need to worry about the order of arguments\n// note that both kinds of short circuits work, but the argument default trumps the constructor default. Think about how you can use this to your advantage.\nclass HyperPolygon {\n\tconstructor({height, width, color=\'green\', shape=\'polygon\'}) {\n\t\tthis.height = height\n\t\tthis.width = width\n\t\tthis.shape = shape\n\t\tthis.color = color || \'blue\'\n\t}\n\t一growPolygon(num) { // \'一\' is a japaneese symbol that forces methods to the bottom of an object.\n\t\tthis.height *= num\n\t\tthis.width *= num\n\t}\n}\n\n\n//new Square(20)\nclass Square extends Polygon {\n\tconstructor(length) {\n\t\t//this.height; // ReferenceError, super needs to be called first!\n\t\t\n\t\t// Here, it calls the parent class\' constructor with lengths\n\t\t// provided for the Polygon\'s width and height\n\t\tsuper(length, length);\n\t\t\n\t\t// Note: In derived classes, super() must be called before you\n\t\t// can use \'this\'. Leaving this out will cause a reference error.\n\t\tthis.name = \'Square\';\n\t}\n\n\tget area() {\n\t\treturn this.height * this.width;\n\t}\n\n\tset area(value) {\n\t\tthis.area = value;\n\t} \n}\n\n\n// and now for the Hyper example\n//new HyperSquare({color:\'gray\', length:\'5\'})\nclass HyperSquare extends HyperPolygon {\n\tconstructor({length, color=\'green\', shape=\'polygon\'}) {\n\t\tsuper({width:length, height:length, color:color})\n\t\tthis.name = \'HyperSquare\'\n\t}\n\t一announce() {\n\t\tconsole.log(\'I am HyperSquare, fighter of all things oblong!!!\')\n\t}\n}'
+  'es6 object literals':
+    'prefix':'es6ObjectLiteral'
+    'body':'${1:/* Object literals are extended to support setting the prototype at\n\tconstruction, shorthand for foo: foo assignments, defining methods\n\tand making super calls. Together, these also bring object literals\n\tand class declarations closer together, and let object-based design\n\tbenefit from some of the same conveniences. */}\n\n${2:var} ${3:obj} = {\n\t\t${4:// Sets the prototype. "__proto__" or \'__proto__\' would also work.}\n\t\t${5:__proto__:} ${6:theProtoObj},\n\t\t${7:// Computed property name does not set prototype or trigger early error for\n\t\t// duplicate __proto__ properties.}\n\t\t${8:[\'__proto__\']}: ${9:somethingElse,}\n\t\t${10:// Shorthand for ‘handler: handler’}\n\t\t${11:handler},\n\t\t${12:// Methods}\n\t\t${13:toString() {\n\t\t${14:// Super calls}\n\t\t${15:return "d " + super.toString();}\n\t\t\\},}\n\t\t${16:// Computed (dynamic) property names}\n\t\t${17:[ "prop_" + (() => 42)() ]: 42}\n};${18}'
+  'es6 parameter deconstruction':
+    'prefix':'es6ParameterDeconstruction'
+    'body':'${1:// Object deconstruction can be used to make function parameters more efficient\n// Note that with \'name\' the object property assignment is missing\n// In this instance ES6 assumes we mean name: name\n// the \'=\' included with bloodType is a default value\n// note that using a parameter object does not care what order you pass in arguments\n\nfunction logInfo({gender: gender, name, bloodType = \'Unknown\'\\}) {\n\tconsole.log(`Name: \\${name\\}`);\n\tconsole.log(`Gender: \\${gender\\}`)\n\tconsole.log(`BloodType: \\${bloodType\\}`);\n\n\t//boodType on the line below is an example of object matching; the reverse of deconstruction\n\treturn {patientName:name, patientGender:gender, bloodType\\}\n\\}\n\n// logInfo({name: \'Bob\', gender: \'Male\'\\})\n\t// logs\n\t\t// "Name: Bob"\n\t\t// "Gender: Male"\n\t\t// "BloodType: unknown"\n\n\t//returns\n\t\t// Object {\n\t\t//\t bloodType: "Unknown",\n\t\t//\t patientGender: "Male",\n\t\t//\t patientName: "Bob"\n\t\t// \\}\n}${2}\n'
+  'es6 list matching':
+    'prefix':'es6ListMatching'
+    'body':'// list matching assigns variables in bulk\n// vars that do not match the index of the assignment array will "fail-soft" to undefined\n// default values can be assigned using the \'=\' as with d below\n\nfunction assignVarsFromArray() {\n\tvar [a, ,b,c,d = 7] = [1,2,3]\n\tconsole.log(`a: ${a}`)\n\tconsole.log(`b: ${b}`)\n\tconsole.log(`c: ${c}`)\n\tconsole.log(`d: ${d}`)\n\treturn [d,c,b,a]\n}\n\n// logs:\n\t// "a: 1"\n\t// "b: 3"\n\t// "c: undefined"\n\t// "d: 7"\n\n// returns:\n\t// [7, undefined, 3, 1]'
+  'es6 spread and rest':
+    'prefix':'es6SpreadRest'
+    'body':'// the \' ... \' below is being used as \'rest\'\n// this will take all of the \'rest\' of the parameters passed and push them into array y\n\nfunction restArguments(x, ...y) {\n\t// y is an Array\n\tconsole.log(y)\n\tconsole.log(`y[1] === ${y[1]}`)\n\treturn x * y.length;\n}\n// restArguments(3, "hello", true, undefined)\n\n// logs\n\t// ["hello", true, undefined]\n\t// "y[1] === true"\n\n// returns\n\t// 9\n\n\n// here the \' ... \' is used in the function call as a \'spread\'\n// this takes the array passed in and \'spreads\' them into the corresponding arguments\nfunction g(x, y, z) {\n\tconsole.log(`x === ${x}`)\n\tconsole.log(`y === ${y}`)\n\tconsole.log(`z === ${z}`)\n\treturn [z,y,x];\n}\n// g(...[1,2,3])\n\n// logs\n\t// "x === 1"\n\t// "y === 2"\n\t// "z === 3"\n\n// returns\n\t// [3, 2, 1]'
+  'es6 iteration object':
+    'prefix':'es6Iteration'
+    'body':'/* Iteration functions (functions that call on some other instance on n)\n\tare easy to create in ES6. The code below creates an array of fibonacci\n\tnumbers. Note that the\t\'if (n > 1000)\' is preventing an infinite loop.\n\n\tNOTE: as of the writing of this snippet your will need babel polyfill\n\t\t\t\tto use the iterator object.\n\t */\n\nlet fibonacci = {\n\t[Symbol.iterator]() {\n\t\tlet pre = 0, cur = 1\n\t\treturn {\n\t\t\tnext () {\n\t\t\t\t[ pre, cur ] = [ cur, pre + cur ] // es6ListMatching\n\t\t\t\treturn { done: false, value: cur }\n\t\t\t}\n\t\t}\n\t}\n}\n\nfunction getFibArr() {\n\tlet fibArr = []\n\tfor (let n of fibonacci) {\n\tif (n > 1000) {\n\t\tbreak\n\t}\n\tfibArr.push(n)\n\t}\n\tconsole.log(fibArr)\n}\n'
+  'es6 array.includes':
+    'prefix':'es6ArrayIncludes'
+    'body':'function check() {\n\tconsole.log("abcde".includes("cd")) //true\n\t\n\tlet arr = [\'beans\', \'broth\', \'meat\', \'e-coli\']\n\tconsole.log(arr.includes(\'e-coli\')) //true\n\t\n\t// some extra examples with && ||\n\tconsole.log(arr.includes(\'e-coli\' && \'ebola\')) //false\n\tconsole.log(arr.includes(\'e-coli\' && \'meat\')) //true\n\tconsole.log(arr.includes(\'e-coli\' || \'ebola\')) //true\n\tconsole.log(arr.includes(\'e-coli\' && \'ebola\' || \'meat\')) //false - not what you want\n\tconsole.log(arr.includes((\'e-coli\' && \'ebola\') || \'meat\')) //false - not what you want\n\tconsole.log(arr.includes(\'e-coli\' && \'ebola\') || arr.includes(\'meat\')) //true - what you want\n\tconsole.log(arr.includes(\'e-coli\' && \'meat\') && arr.includes(\'meat\' || \'burritos\')) //true - what you want\n\t\n\t// *this snippet sponsored by chipote-la-way\n}'
+  'es6 if syntax':
+    'prefix':'es6IfSyntax'
+    'body':'let arr = [1,2,3,4,5,6]\n\n// traditional syntax requires {} with code blocks like if\nfunction returnEvens(arr) {\n\tlet evens = []\n\tarr.forEach(function(num) {\n\tif (num % 2 === 0) {\n\t\tevens.push(num)\n\t}\n\t})\n\tconsole.log(evens)\n}\n\n\nfunction returnOdds(arr) {\n\tlet odds = []\n\tarr.forEach(function(num) {\n\tif (num % 2) { // this works because 0 is a falsy value\n\t\todds.push(num)\n\t}\n\t})\n\tconsole.log(odds)\n}\n\n\n// in ES6 {} for if statments is not required\nfunction returnEvens(arr) {\n\tlet evens = []\n\tarr.forEach(function(num) {\n\tif (num % 2 === 0)\n\t\tevens.push(num)\n\t})\n\tconsole.log(evens)\n}\n\n\nfunction returnOdds(arr) {\n\tlet odds = []\n\tarr.forEach(function(num) {\n\tif (num % 2) // this works because 0 is a falsy value\n\t\todds.push(num)\n\t})\n\tconsole.log(odds)\n}\n\n//even further refactored with ES6\nfunction returnEvens(arr, events=[]) {\n\tarr.forEach(num => {\n\tif (num % 2 === 0) evens.push(num)\n\t})\n\tconsole.log(evens)\n}\n\n//this makes for a very nice looking syntax\nfunction returnEvensAndOdds(arr, evens=[], odds=[]) {\n\tarr.forEach(num => {\n\tif (num % 2) odds.push(num)\n\telse evens.push(num)\n\t})\n\tconsole.log(odds)\n\tconsole.log(evens)\n}\n\n// //Note that the code below has a syntax error. If and else have to be on separate lines\n// //This is possible using a ternary operator, however.\n// function returnEvensAndOdds(arr, evens=[], odds=[]) {\n//\tarr.forEach(function(num) {if (num % 2) odds.push(num) else evens.push(num)})\n//\tconsole.log(odds)\n//\tconsole.log(evens)\n// }\n\n\n// further refactored using the ternary operator\nfunction returnEvensAndOdds(arr, evens=[], odds=[]) {\n\tarr.forEach(num => {\n\tnum % 2 ? odds.push(num) : evens.push(num)\n\t})\n\tconsole.log(odds)\n\tconsole.log(evens)\n}'
   'es6-disable-warnings': # to disable es6 warnings in es6. Need to create a file called .jshintrc in the root directory of my project
     'prefix': 'es6-disable-warnings'
     'body': """
@@ -298,12 +344,19 @@
         "esversion": 6
       }
     """
+  'forEach':
+    'prefix': 'forEach'
+    'body': """
+      ${1:array}.forEach((${2:item})=>{
+        $3
+      });
+    """
   'function2': # workaround to emulate the default "function" snippet
     'prefix': 'function2'
     'body': """
       function $1 ($2) {
         $3
-      } //end of $1
+      }
     """
   'get-ajax': # "get" in ajax with jQuery
     'prefix': 'get-ajax'
@@ -323,20 +376,30 @@
         draw.drawImage(imageName, x, y);
       };
     """
+  'import':
+    'prefix': 'import'
+    'body': 'import $1 from "./$1";'
+  'items':
+    'prefix': 'items'
+    'body': """
+      const items = {
+        thingKey: thingValue
+      };
+    """
   'it-should': # the "it" function for testing
     'prefix': 'it-should'
     'body': """
-      it("should $1", function () {
+      it("should $1", ()=>{
         $2
         assert.strictEqual("dogs", "cats");
-      }); //end of $1
+      });
     """
   'jQuery-basic-skeleton': # the basic setup for jQuery
     'prefix': 'jQuery-basic-skeleton'
     'body': """
       $(document).ready(function () {
         $1
-      }); //end of jQuery body
+      });
     """
   'line_in_canvas': # to create a line in canvas
     'prefix': 'line_in_canvas'
@@ -352,6 +415,21 @@
   'log2': # workaround to emulate the default "log" snippet
     'prefix': 'log2'
     'body': 'console.log($1)'
+   'ls set item':
+    'prefix':'lsSet'
+    'body':'localStorage.setItem(\'${1:key}\',${2:value});${3}'
+  'ls get item':
+    'prefix':'lsGet'
+    'body':'localStorage.getItem(\'${1:key}\');${2}'
+  'ls set stringified':
+    'prefix':'lsSetStringified'
+    'body':'localStorage.setItem(\'${1:key}\', JSON.stringify(${2:value}));${3}'
+  'ls get stringified':
+    'prefix':'lsGetStringified'
+    'body':'JSON.parse(localStorage.setItem(\'${1:key}\'));${2}'
+  'ls clear':
+    'prefix':'lsClear'
+    'body':'localStorage.clear();${1}'
   'mobile_redirect': # redirects user to a mobile site if their screen is smaller than 500 px
     'prefix': 'mobile_redirect'
     'body': """
@@ -373,7 +451,7 @@
         property: "value(text)",
       };
     """
-  'offset_return': # used to just return corrdinates using "offset()", rather than set the coord.
+  'offset_return': # used to just return coordinates using "offset()", rather than set the coord.
     'prefix': 'offset_return'
     'body': 'offset().left|.top| '
   'offset_set_coord': # to assign new coordinates to top and/or left of object using "offset()"
@@ -412,6 +490,9 @@
 
     }
     """
+  'parseInt':
+    'prefix': 'parseInt'
+    'body': 'parseInt($1, 10)'
   'pinpoint': # to calculate the position of a point in a canvas object
     'prefix': 'pinpoint'
     'body': '(outputX - objFromLeft), (outputY - objFromTop)'
@@ -420,7 +501,14 @@
     'body': """
       $.post("/whereToPost", {key: value, key2: value2}).then(function (response) {
         //do something with response
-      }); //end of post
+      });
+    """
+  'prototype-refined':
+    'prefix': 'prototype-refined'
+    'body': """
+      $1.prototype.${2:methodName} = function ($3) {
+        $4
+      };
     """
   'quadratic_curve': # to draw a quadratic curve
     'prefix': 'quadratic_curve'
@@ -439,6 +527,17 @@
         let max = max;
         return Math.floor(Math.random() * (max - min) + min);
       }
+    """
+  'react-indexjs-setup': # my comments
+    'prefix': 'react-indexjs-setup'
+    'body': """
+      import React from 'react';
+      import { render } from 'react-dom';
+
+      import Application from './components/Application.jsx';
+      require('./styles.scss');
+
+      render(<Application/>, document.getElementById('application'));
     """
   'rect': # rectangle in p5js
     'prefix': 'rect'
@@ -479,12 +578,23 @@
 
       //we need an instance of the document
       global.document = require('jsdom').jsdom(
-        "<html>HTML from index.html</html>"
+        "<div id='application'></div><script src='main.bundle.js'></script></body></html>"
       );
 
       //and an instance of the window
       global.window = document.defaultView;
       global.navigator = window.navigator;
+
+      //to allow local storage when testing
+      if (!global.window.localStorage) {
+        localStorage = {
+          getItem() { return '{}'; },};
+        }
+
+      //to allow jquery
+        if (typeof(exports) !== "undefined"){
+          var $ = require('jquery');
+        }
     """
   'sort': # sort function
     'prefix': 'sort'
@@ -503,6 +613,11 @@
         return a + b;
       }, 0);
     """
+  'test':
+    'prefix': 'test'
+    'body': """
+      console.log("test");
+    """
   'text_in_canvas': # to create text in canvas
     'prefix': 'text_in_canvas'
     'body': """
@@ -511,34 +626,42 @@
       draw.textAlign = "";
       draw.fillText("text", x, y); //can also use "draw.strokeText("text", x, y)" to create text without a fill
     """
+  'ternary':
+    'prefix': 'ternary'
+    'body': 'thing ? ifThingIsTrueDoThis : ifThingIsFalseDoThis'
   'today': # insert the current date in a readable format
     'prefix': 'today'
     'body': 'new Date().toDateString()'
   'webpack-config-js': # to set up the webpack.config.js file
     'prefix': 'webpack-config-js'
     'body': """
-    const path = require('path');
+      const path = require('path');
 
-    module.exports = {
-      entry: {
-        main: "./lib/index.js",
-        test: "mocha!./test/index.js"
-      },
-      output: {
-        path: __dirname,
-        filename: "[name].bundle.js"
-      },
-      module: {
-        loaders: [
-          { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' },
-          { test: /\.css$/, loader: "style!css" },
-          { test: /\.scss$/, loader: "style!css!sass" }
-        ]
-      },
-      resolve: {
-        extensions: ['', '.js', '.json', '.scss', '.css']
-      }
-    };
+      module.exports = {
+        entry: {
+          main: "./lib/index.js",
+          test: "mocha!./test/index.js"
+          },
+          output: {
+            path: __dirname,
+            filename: "[name].bundle.js"
+            },
+            module: {
+              loaders: [
+                { test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader' },
+                { test: /\.css$/, loader: "style!css" },
+                { test: /\.scss$/, loader: "style!css!sass" } //add \ before each file extension to avoid regex error
+              ]
+              },
+              resolve: {
+                extensions: ['', '.js', '.json', '.scss', '.css']
+              }
+            };
+    """
+  'wrapper':
+    'prefix': 'wrapper'
+    'body': """
+      const wrapper = mount(<$1/>);
     """
 
 ####################################
@@ -550,33 +673,47 @@
       "devDependencies": {
         "babel": "^6.5.2",
         "babel-core": "^6.14.0",
+        "babel-eslint": "^6.1.2",
         "babel-loader": "^6.2.5",
         "babel-polyfill": "^6.13.0",
         "babel-preset-es2015": "^6.14.0",
         "babel-preset-react": "^6.11.1",
+        "babel-preset-stage-1": "^6.16.0",
+        "babel-register": "^6.14.0",
         "chai": "^3.5.0",
         "css-loader": "^0.25.0",
         "enzyme": "^2.4.1",
-        "html-webpack-plugin": "^2.22.0",
-        "jquery": "^3.1.0",
-        "jshint": "^2.9.3",
-        "jsdom": "^9.6.0",
-        "locus": "^1.2.0",
+        "escape-html": "^1.0.3",
+        "eslint": "^3.9.1",
+        "eslint-config-airbnb": "^11.2.0",
+        "eslint-plugin-import": "^2.1.0",
+        "eslint-plugin-jsx-a11y": "^2.2.3",
+        "eslint-plugin-react": "^6.5.0",
+        "firebase-tools": "^3.0.7",
+        "jsdom": "^9.5.0",
         "mocha": "^3.0.2",
         "mocha-loader": "^1.0.0",
-        "node-sass": "^3.9.0",
-        "react-addons-test-utils": "^15.3.1",
-        "sass-loader": "^4.0.1",
+        "node-libs-browser": "^1.0.0",
+        "node-sass": "^3.10.0",
+        "sass-loader": "^4.0.2",
         "style-loader": "^0.13.1",
         "webpack": "^1.13.2",
-        "webpack-dev-server": "^1.15.1"
-        },
+        "webpack-dev-server": "^1.15.2"
+      },
       "dependencies": {
+        "firebase": "^3.4.0",
+        "locus": "^1.2.0",
+        "lodash": "^4.15.0",
+        "moment": "^2.15.1",
+        "sinon": "^1.17.6",
         "react": "^15.3.1",
-        "react-dom": "^15.3.1"
+        "react-addons-test-utils": "^15.3.1",
+        "react-dom": "^15.3.1",
+        "react-scroll": "^1.4.2",
+        "underscore": "^1.8.3"
       }
     """
-  'webpack-package-json-scripts': # my comments
+  'webpack-package-json-scripts':
     'prefix': 'webpack-package-json-scripts'
     'body': """
       "scripts": {
@@ -590,28 +727,130 @@
 
 ####################################
 
-'.source.js.jsx': ####for react
+'.source.js.jsx': #### for react
+  'arrow-function': # arrow function for es6
+    'prefix': 'arrow-function'
+    'body': """
+      ($1)=>{$2}
+    """
+  'className':
+    'prefix': 'className'
+    'body': """
+      className="$1"
+    """
+  'componentDidMount':
+    'prefix': 'componentDidMount'
+    'body': """
+      componentDidMount(){
+        $1
+      }
+    """
+  'componentWillUnmount':
+    'prefix': 'componentWillUnmount'
+    'body': """
+      componentWillUnmount() {
+        this.serverRequest.abort();
+      }
+    """
+  'export-default-class':
+    'prefix': 'export-default-class'
+    'body': """
+      import React, { Component } from 'react';
+
+      export default class $1 extends Component {
+        constructor() {
+          super();
+
+        }
+
+        render() {
+          return(
+            <div>Hi</div>
+          );
+        }
+
+      } /
+
+    """
+  'function-prototype-method-in-react':
+    'prefix': 'function-prototype-method-in-react'
+    'body': """
+      $1($2){
+        $3
+      }
+    """
+  'import-from-component-react':
+    'prefix': 'import-from-component-react'
+    'body': """
+      import $1 from './$1';
+    """
+  'import-react-from-react':
+    'prefix': 'import-react-from-react'
+    'body': """
+      import React, { Component } from 'react';
+    """
+  'items':
+    'prefix': 'items'
+    'body': """
+      const items = {
+        thingKey: thingValue
+      };
+    """
+  'onChange':
+    'prefix': 'onChange'
+    'body': """
+      onChange={${1:this.props.handleChange}}
+    """
+  'onClick':
+    'prefix': 'onClick'
+    'body': 'onClick={${1:this.props.handleClick}}'
+  'parseInt':
+    'prefix': 'parseInt'
+    'body': 'parseInt($1, 10)'
+  'proptypes-react':
+    'prefix': 'proptypes-react'
+    'body': """
+      $1.propTypes = {
+        $2: React.PropTypes.$3,
+      }
+    """
   'react-basic-constructor':
     'prefix':'react-basic-constructor'
     'body': """
-      const React = require('react');
+      import React, {Component} from 'react';
       const ReactDOM = require('react-dom');
-      //require any other jsx files needed
 
-      class $1 extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {location: props.$2};
-        }
+      class $1 extends Component {
 
-        render () {
+        render() {
           return (
-
+            <div>Hello! This is a test.</div>
           );
         }
-      } //end of $1
 
-      module.exports = $1;
+      }
+
+
+      export default $1;
+    """
+  'render-react':
+    'prefix': 'render-react'
+    'body': """
+      render() {
+        return(
+          <div>Hi</div>
+        );
+      }
+    """
+  'setState':
+    'prefix': 'setState'
+    'body': """
+      this.setState({${1:key}:${2:value}});
+    """
+  'test':
+    'prefix': 'test'
+    'body': """
+      console.log("test");
     """
 #####################################
 
@@ -657,6 +896,22 @@
         clear:both;
       }
     """
+  'debug-sass':
+    'prefix': 'debug-sass'
+    'body': """
+      $debug: false;
+
+      $debug-border-style: 1px dotted red;
+      $debug-background-color: magenta;
+
+      @if ($debug) {
+
+        section {
+        border: $debug-border-style;
+        }
+
+      }
+    """
   'giant_monitor': # media query for giant monitors
     'prefix': 'giant_monitor'
     'body': """
@@ -685,7 +940,7 @@
     """
   'linear_gradient': # linear gradient
     'prefix': 'linear_gradient'
-    'body': 'background: linear-gradient(to direction, color1, color2);'
+    'body': 'background: linear-gradient(to ${1:direction}, ${2:color1}, ${3:color2});'
   'link_standard': # my standard settings for links
     'prefix': 'link_standard'
     'body': """
@@ -703,18 +958,52 @@
         font-style: italic;
       }
     """
-  'margin-four': # short form for margin entry
+  'margin-auto':
+    'prefix': 'margin-auto'
+    'body': 'margin: 0 auto;'
+  'margin-four':
     'prefix': 'margin-four'
-    'body': 'margin: top right bottom left;'
-  'margin-two': # short form for margin entry
+    'body': 'margin: ${1:top} ${2:right} ${3:bottom} ${4:left};'
+  'margin-two':
     'prefix': 'margin-two'
-    'body': 'margin: top-bottom left-right;'
-  'padding_four': # short form for padding entry
+    'body': 'margin: ${1:top-bottom} ${2:left-right};'
+  'media-query-custom':
+    'prefix': 'media-query-custom'
+    'body': """
+      @media screen and (max-width: ${1:800px}) {
+
+        ${2:element} {
+          $3
+        }
+
+      }
+    """
+  'padding_four':
     'prefix': 'padding_four'
-    'body': 'padding: top right bottom left;'
-  'padding-two': # short form for padding entry
+    'body': 'padding: ${1:top} ${2:right} ${3:bottom} ${4:left};'
+  'padding-two':
     'prefix': 'padding-two'
-    'body': 'padding: top-bottom left-right;'
+    'body': 'padding: ${1:top-bottom} ${2:left-right};'
+  'placeholder-styling':
+    'prefix': 'placeholder-styling'
+    'body': """
+      //from http://codepen.io/htmlcolorcodes/pen/xwKaNj
+      //use all of this code as a single chunk, not embedded into any selectors
+      ::-webkit-$1-placeholder { /* Chrome */
+        color: $deep-blue;
+      }
+      :-ms-$1-placeholder { /* IE 10+ */
+        color: $deep-blue;
+      }
+      ::-moz-placeholder { /* Firefox 19+ */
+        color: $deep-blue;
+        opacity: 1;
+      }
+      :-moz-placeholder { /* Firefox 4 - 18 */
+        color: $deep-blue;
+        opacity: 1;
+      }
+    """
   'pseudo-link': # marks up a piece of text like a link, even though it's not a true link.
     'prefix': 'pseudo-link'
     'body': """
@@ -781,6 +1070,12 @@
       }
 
     """
+  'sanity-check':
+    'prefix': 'sanity-check'
+    'body': """
+      background-color: magenta;
+      color: magenta;
+    """
   'smartphone': # media query for smartphone
     'prefix': 'smartphone'
     'body': """
@@ -805,6 +1100,9 @@
         element2 {}
       }
     """
+  'text-align-center':
+    'prefix': 'text-align-center'
+    'body': 'text-align: center;'
   'text-replacement': # replace text with an image
     'prefix': 'text-replacement'
     'body': """
