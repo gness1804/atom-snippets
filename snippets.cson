@@ -1,3 +1,4 @@
+# To see
 # Your snippets
 #
 # Atom snippets allow you to enter a simple prefix in the editor and hit tab to
@@ -6,7 +7,7 @@
 # You can create a new snippet in this file by typing "snip" and then hitting
 # tab.
 #
-# An example CoffeeScript snippet to expand log to console.log:
+# An example CoffeeScript snippet to expand log to console:
 #
 # '.source.coffee':
 #   'Console log':
@@ -32,6 +33,11 @@
 ##########################
 
 '.text.html.basic': # for HTML documents
+  'axios-cdn':
+    'prefix': 'axios-cdn'
+    'body': """
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    """
   'canvas_expanded': # expanded version of the "canvas" snippet that includes a script link to canvas script file
     'prefix': 'canvas_expanded'
     'body': """
@@ -170,27 +176,94 @@
     'body': """
       <link rel="stylesheet" style="text/css" href="reset.css"/>
     """
-    'tab-index': # tab-index 0 for accessibility
-      'prefix': 'tab-index'
-      'body': 'tabindex="0"'
+  'section-better':
+    'prefix': 'section-better'
+    'body': """
+      <section class="$1">
+
+      </section>
+    """
+  'tab-index': # tab-index 0 for accessibility
+    'prefix': 'tab-index'
+    'body': 'tabindex="0"'
 
 ##########################
 
 '.source.js': # for JavaScript documents
+  'nerpCommentHeading':
+    'prefix':'nerpCommentHeading'
+    'body':'// ------------------------------------\n// ${1:Heading}\n// ------------------------------------\n${2}\n'
+  'nerpTemplate':
+    'prefix':'nerpTemplate'
+    'body':'/* eslint-disable */\n\n// ------------------------------------\n// SHORTCUT\n// ------------------------------------\n\'${1:shortCut goes here}\'\n\n// ------------------------------------\n// OUTPUT\n// ------------------------------------\n\'final sippet output goes here\'\n\n// ------------------------------------\n// INPUT\n// ------------------------------------\n${2:\'tabstop engineered snippet goes here\'}\n\n// ------------------------------------\n// GENERATED\n// ------------------------------------\n\'oneline generated snippet goes here\''
+  'nerpWebSmartComponent':
+    'prefix':'nerpWebSmartComponent'
+    'body':'import React, { Component, PropTypes } from \'react\'\nimport classes from \'./${1:ComponentName}.styles.scss\'\n\nclass ${1:ComponentName} extends Component {\n\tconstructor () {\n\t\tsuper()\n\t\tthis.state = {}\n\t}\n\trender () {\n\t\tconst { exampleProp1 } = this.props\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h2>Smart Component {exampleProp1}</h2>\n\t\t\t</div>\n\t\t)\n\t}\n}\n\n${1:ComponentName}.propTypes = {\n\texampleProp1: PropTypes.number.isRequired\n}\n\nmodule.exports = ${1:ComponentName}\n'
+  'nerpReduxContainer':
+    'prefix':'nerpReduxContainer'
+    'body':'import { connect } from \'react-redux\'\n${3:import { ${5:actionCreator} \\} from \'${2}\'}\nimport ${1:ExampleComponent} from \'./${1:ExampleComponent}.component.js\'\n\n${3:const mapDispatchToProps = {\n\t${4:actionCreator}\n}}\n\n${5:const mapStateToProps = (state, ownProps) => ({\n\t${6:exampleProp}: state.${1:ExampleComponent}.${6:exampleProp}\n\\})}\n\nexport default connect(mapStateToProps, mapDispatchToProps)(${1:ExampleComponent})\n\n'
+  'nerpNativeComponent':
+    'prefix':'nerpNativeComponent'
+    'body':'import React, { Component, PropTypes } from \'react\'\nimport { ${2:Text, TouchableOpacity} } from \'react-native\'\nimport styles from \'./${1:ComponentName}.styles\'\n\nclass ${1:ComponentName} extends Component {\n\trender () {\n\t\treturn (\n\t\t\t${3:<TouchableOpacity onPress={this.props.onPress\\}>\n\t\t\t\t<Text style={styles.text\\}>{this.props.text\\}</Text>\n\t\t\t</TouchableOpacity>}\n\t\t)\n\t}\n}\n\n${1:ComponentName}.propTypes = {\n\t${4:onPress: PropTypes.func.isRequired,\n\ttext: PropTypes.string.isRequired}\n}\n\nexport default ${1:ComponentName}\n\n'
+  'nerpIndex':
+    'prefix':'nerpIndex'
+    'body':'import ${1:ExampleComponent} from \'./${1:ExampleComponent}.${2:component}.js\'\n\nexport default ${1:ExampleComponent}\n'
   'addEventListener': # for JS addEventListener
     'prefix': 'addEventListener'
     'body': """
-      addEventListener('event', function () {
+      ${1:document}.addEventListener('${2:event}', () => {
 
-        });
+      });
+    """
+  'action-creator-redux':
+    'prefix': 'action-creator-redux'
+    'body': """
+      export const ${1:actionCreatorName} = ($2) => {
+        return {
+          type: ${3:ACTION_TYPE},
+        }
+      }
+    """
+  'ajax-vanilla-js':
+    'prefix': 'ajax-vanilla-js'
+    'body': """
+      var ${1:hitAPI} = new XMLHttpRequest();
+      ${1:hitAPI}.open('GET', '${2:url}', true);
+      ${1:hitAPI}.send();
+      ${1:hitAPI}.onreadystatechange = function() {
+        if (${1:hitAPI}.readyState === XMLHttpRequest.DONE) {
+          if (${1:hitAPI}.status === 200) {
+            //success
+          } else {
+            console.error('There was a problem with the API call.');
+          }
+        }
+      }
     """
   'alert': # the JS "alert" function
     'prefix': 'alert'
     'body': 'alert("$1");'
+  'andThen-ember-test':
+    'prefix': 'andThen-ember-test'
+    'body': """
+      andThen(function() {
+        assert.equal($1);
+      });
+    """
   'animate': # the jQuery "animate()" method
     'prefix': 'animate'
     'body': """
       animate({cssProp: "value", cssProp: "value"}, speed, callbackFxn); // be sure to give the targeted element the position relative, absolute, or fixed
+    """
+  'appendChild':
+    'prefix': 'appendChild'
+    'body': """
+    ${1:document}.appendChild($2)
+    """
+  'array-not-an-array':
+    'prefix': 'array-not-an-array'
+    'body': """
+      !Array.isArray($1)
     """
   'array-of-numbers': # to create a blank array with spaces for numbers
     'prefix': 'array-of-numbers'
@@ -201,9 +274,7 @@
   'arrow-function': # arrow function for es6
     'prefix': 'arrow-function'
     'body': """
-      ($1) => {
-        $2
-      }
+      ($1) => { $2 }
     """
   'assert.strictEqual':
     'prefix': 'assert.strictEqual'
@@ -230,6 +301,23 @@
       draw.stroke();
       draw.closePath();
     """
+  'blog-post-object':
+    'prefix': 'blog-post-object'
+    'body': """
+      {
+        id: ${1:0},
+        title: '',
+        image: './',
+        alt: '',
+        note: '',
+        github: '',
+        interactiveLink: '',
+        body: '',
+        secondPara: '',
+        thirdPara: '',
+        date: '',
+      },
+    """
   'border-test': # border test for jQuery
     'prefix': 'border-test'
     'body': """
@@ -245,6 +333,19 @@
       var canvas$1 = document.getElementById("canvas");
       var draw = canvas.getContext("2d");
     """
+  'case-in-redux-reducer':
+    'prefix': 'case-in-redux-reducer'
+    'body': """
+      case '${1:ACTION_TYPE}':
+        return $2;
+    """
+  'catch':
+    'prefix': 'catch'
+    'body': """
+      ${1:promise}.catch((error) => {
+        console.log(error.message);
+        });
+    """
   'circle_in_canvas': # to create a circle in canvas
     'prefix': 'circle_in_canvas'
     'body': """
@@ -255,18 +356,31 @@
       draw.fill(); //or "draw.stroke()" for an unfilled circle
       draw.closePath(); //needed if not using "fill()"
     """
-  'constructor': # to create a new blank constructor function
-    'prefix': 'constructor'
+  'classList-add-class-vanilla-js':
+    'prefix': 'classList-add-class-vanilla-js'
     'body': """
-      function Name (arg1, arg2) {
-        this.property = "value(text)";
-        this.property = "value(text)";
-        this.property = "value(text)";
-        this.property = value(number);
-        this.property = "value(text)";
-        this.arg1 = arg1;
-        this.arg2 = arg2;
+      ${1:element}.classList.add('${2:className}');
+    """
+  'constructor-es5':
+    'prefix': 'constructor-es5'
+    'body': """
+      function ${1:Name} ($2) {
+        $3
       };
+    """
+  'constructor-es6':
+    'prefix': 'constructor-es6'
+    'body': """
+      class ${1:Name} {
+        constructor($2){
+
+        }
+      }
+    """
+  'createElement':
+    'prefix': 'createElement'
+    'body': """
+      ${1:document}.createElement('$2')
     """
   '.css': # jQuery's .css()
     'prefix': '.css'
@@ -279,12 +393,19 @@
   'describe': # "describe" for tests
     'prefix': 'describe'
     'body': """
-      describe("$1", ()=>{
-        it("should $2", ()=>{
+      describe('$1', function () {
+        it('$2', function () {
           $3
-          assert.strictEqual("dogs", "cats");
+          assert.strictEqual('dogs', 'cats');
         });
       });
+    """
+  'dispatch-redux':
+    'prefix': 'dispatch-redux'
+    'body': """
+      store.dispatch({
+        type: ${1:'ACTION_TYPE'},
+        });
     """
   'dropdown_slidedown': # to manage the dropdown menus for the above HTML
     'prefix': 'dropdown_slidedown'
@@ -303,6 +424,13 @@
     'prefix': 'ellipse'
     'body': """
       ellipse(xstart, ystart, width, height);
+    """
+  'ember-test-template':
+    'prefix': 'ember-test-template'
+    'body': """
+      test('$1', function(assert) {
+        $2
+      });
     """
   'es6 constant':
     'prefix':'es6Const'
@@ -344,19 +472,53 @@
         "esversion": 6
       }
     """
+  'eslint-disable-file':
+    'prefix': 'eslint-disable-file'
+    'body': '/* eslint-disable */'
+  'eslint-disable-line':
+    'prefix': 'eslint-disable-line'
+    'body': '// eslint-disable-line'
+  'filter':
+    'prefix': 'filter'
+    'body': """
+      ${1:array}.filter(($2) => {
+          return $3
+        })
+    """
   'forEach':
     'prefix': 'forEach'
     'body': """
-      ${1:array}.forEach((${2:item})=>{
+      ${1:array}.forEach((${2:item}) => {
         $3
       });
     """
-  'function2': # workaround to emulate the default "function" snippet
-    'prefix': 'function2'
+  'function-es5':
+    'prefix': 'function-es5'
     'body': """
-      function $1 ($2) {
+      function ${1:name}($2) {
         $3
       }
+    """
+  'function-es6':
+    'prefix': 'function-es6'
+    'body': """
+      const ${1:name} = ($2) => {
+        $3
+      }
+    """
+  'function-react':
+    'prefix': 'function-react'
+    'body': """
+      ${1:name} = ($2) => {
+        $3
+      }
+    """
+  'function-self-invoking':
+    'prefix': 'function-self-invoking'
+    'body': """
+    (function ${1:name}($2){
+      $3
+    })()
     """
   'get-ajax': # "get" in ajax with jQuery
     'prefix': 'get-ajax'
@@ -365,15 +527,25 @@
         //do something with data
         });
     """
-  'getElementById': # slight revised form for getElementById
-    'prefix': 'getElementById'
-    'body': 'getElementById("$1")'
+  'get-element-by-id-better':
+    'prefix': 'get-element-by-id-better'
+    'body': """
+      document.getElementById('$1');
+    """
+  'get-express':
+    'prefix': 'get-express'
+    'body': """
+      app.get('/', (request, response) => {
+        response.send();
+      });
+    """
   'image_in_canvas': # to insert an image into canvas
     'prefix': 'image_in_canvas'
     'body': """
-      window.onload = function () {
-        var $1imageName= document.getElementById("imageId");
-        draw.drawImage(imageName, x, y);
+      window.onload = () => {
+        const ${1:imageName} = document.getElementById("${2:imageId}");
+        draw.drawImage(${1:imageName}, x, y, width, height);
+        //additional images go here
       };
     """
   'import':
@@ -389,9 +561,9 @@
   'it-should': # the "it" function for testing
     'prefix': 'it-should'
     'body': """
-      it("should $1", ()=>{
+      it('$1', function () {
         $2
-        assert.strictEqual("dogs", "cats");
+        assert.strictEqual('dogs', 'cats');
       });
     """
   'jQuery-basic-skeleton': # the basic setup for jQuery
@@ -400,6 +572,41 @@
       $(document).ready(function () {
         $1
       });
+    """
+  'jQuery-selector':
+    'prefix': 'jQuery-selector'
+    'body': """
+      $('$1')
+    """
+  'JSON.parse':
+    'prefix': 'JSON.parse'
+    'body': """
+      JSON.parse($1)
+    """
+  'knex-create-table':
+    'prefix': 'knex-create-table'
+    'body': """
+      knex.schema.createTable('${1:name}', function(table) {
+
+      }),
+    """
+  'knex-exports-down':
+    'prefix': 'knex-exports-down'
+    'body': """
+      exports.down = function(knex, Promise) {
+          return Promise.all([
+
+          ])
+      };
+    """
+  'knex-exports-up':
+    'prefix': 'knex-exports-up'
+    'body': """
+      exports.up = function(knex, Promise) {
+          return Promise.all([
+
+          ])
+      };
     """
   'line_in_canvas': # to create a line in canvas
     'prefix': 'line_in_canvas'
@@ -412,6 +619,24 @@
       //draw.fill(); if filling a shape; can also precede this with "draw.fillStyle = ''"
       //draw.closePath(); //unless drawfill() is used
     """
+  'listen-express':
+    'prefix': 'listen-express'
+    'body': """
+      app.listen(app.get('port'), () => {
+        console.log(`${app.locals.title} is running on ${app.get('port')} `);
+      });
+    """
+  'localStorage-get-item':
+    'prefix':'localStorage-get-item'
+    'body':'JSON.parse(localStorage.getItem(\'${1:key}\'));${2}'
+  'localStorage-set-item':
+    'prefix':'localStorage-set-item'
+    'body':'localStorage.setItem(\'${1:key}\', JSON.stringify(${2:value}));${3}'
+  'log':
+    'prefix': 'log'
+    'body': """
+      console.log($1)
+    """
   'log2': # workaround to emulate the default "log" snippet
     'prefix': 'log2'
     'body': 'console.log($1)'
@@ -421,15 +646,49 @@
   'ls get item':
     'prefix':'lsGet'
     'body':'localStorage.getItem(\'${1:key}\');${2}'
-  'ls set stringified':
-    'prefix':'lsSetStringified'
-    'body':'localStorage.setItem(\'${1:key}\', JSON.stringify(${2:value}));${3}'
-  'ls get stringified':
-    'prefix':'lsGetStringified'
-    'body':'JSON.parse(localStorage.setItem(\'${1:key}\'));${2}'
   'ls clear':
     'prefix':'lsClear'
     'body':'localStorage.clear();${1}'
+  'map-array':
+    'prefix': 'map-array'
+    'body': """
+      ${1:array}.map((${2:item}) => {
+        $3
+      })
+    """
+  'mapDispatchToProps':
+    'prefix': 'mapDispatchToProps'
+    'body': """
+      const mapDispatchToProps = (dispatch) => {
+        return {
+          ${1:propName}: () => {
+            dispatch(${2:actionCreator}())
+          },
+        }
+      }
+    """
+  'mapStateToProps':
+    'prefix': 'mapStateToProps'
+    'body': """
+      const mapStateToProps = (state) => ({
+        state,
+      })
+    """
+  'match-react-router':
+    'prefix': 'match-react-router'
+    'body': """
+      <Match exactly pattern="/" component={${1:Name}} />
+    """
+  'match-regex':
+    'prefix': 'match-regex'
+    'body': """
+      ${1:str}.match(${2:regex})
+    """
+  'miss-react-router':
+    'prefix': 'miss-react-router'
+    'body': """
+      <Miss component={${1:NotFound}} />
+    """
   'mobile_redirect': # redirects user to a mobile site if their screen is smaller than 500 px
     'prefix': 'mobile_redirect'
     'body': """
@@ -439,6 +698,21 @@
           window.location.replace("$1.html");
         }
       };
+    """
+  'module.exports':
+    'prefix': 'module.exports'
+    'body': """
+      module.exports = $1
+    """
+  'Object.assign':
+    'prefix': 'Object.assign'
+    'body': """
+      Object.assign(${1:origObject}, { ${2:newProperty}: ${3:newValue} })
+    """
+  'Object.keys':
+    'prefix': 'Object.keys'
+    'body': """
+      Object.keys(${1:objName})
     """
   'object_w_properties': # to create a blank object block with several property and value templates
     'prefix': 'object_w_properties'
@@ -472,12 +746,12 @@
         }
       });
     """
-  'on_simplified': # a simplified template for the jQuery ".on" method
-    'prefix': 'on_simplified'
+  'on-simplified': # a simplified template for the jQuery ".on" method
+    'prefix': 'on-simplified'
     'body': """
-      on("event1 event2", {optional data to pass to function}, function() {
-        //function body
-        });
+      ${1:thing}.on('${2:event}', ($3) => {
+        $4
+      });
     """
   'p5js_setup': # basic setup for p5js
     'prefix': 'p5js_setup'
@@ -503,12 +777,37 @@
         //do something with response
       });
     """
+  'post-express':
+    'prefix': 'post-express'
+    'body': """
+      app.post('/', (request, response) => {
+
+      });
+    """
+  'prevent-default':
+    'prefix': 'prevent-default'
+    'body': '${1:e}.preventDefault();'
+  'promise-better':
+    'prefix': 'promise-better'
+    'body': """
+       const promise = new Promise((resolve, reject) => {
+          $1
+       });
+       promise.then($2);
+    """
   'prototype-refined':
     'prefix': 'prototype-refined'
     'body': """
       $1.prototype.${2:methodName} = function ($3) {
         $4
       };
+    """
+  'put-express':
+    'prefix': 'put-express'
+    'body': """
+      app.put('/', (request, response) => {
+
+      });
     """
   'quadratic_curve': # to draw a quadratic curve
     'prefix': 'quadratic_curve'
@@ -519,6 +818,11 @@
       draw.stroke();
       draw.closePath();
     """
+  'query-selector':
+    'prefix': 'query-selector'
+    'body': """
+      ${1:document}.querySelector('$2');
+    """
   'random-number-generator': # random number generator allowing one to set a min and max
     'prefix': 'random-number-generator'
     'body': """
@@ -527,6 +831,36 @@
         let max = max;
         return Math.floor(Math.random() * (max - min) + min);
       }
+    """
+  'react-dumb-component':
+    'prefix': 'react-dumb-component'
+    'body': """
+      import React, { Component } from 'react';
+
+      const ${1:name} = ($2) => {
+        return (
+          <div>Hello! This is a test.</div>
+        );
+      }
+
+      export default $1;
+    """
+  'react-smart-component':
+    'prefix':'react-smart-component'
+    'body': """
+      import React, { Component } from 'react';
+
+      class $1 extends Component {
+
+        render() {
+          return (
+            <div>Hello! This is a test.</div>
+          );
+        }
+
+      }
+
+      export default $1;
     """
   'react-indexjs-setup': # my comments
     'prefix': 'react-indexjs-setup'
@@ -550,6 +884,50 @@
       draw$1.fillStyle = "//color or style that fills the rectangle";
       draw.fillRect(xstart, ystart, xwidth, yheight);
     """
+  'reduce-array':
+    'prefix': 'reduce-array'
+    'body': """
+      ${1:array}.reduce((${3:accum}, ${4:iteratee}) => {
+        return ///
+        }, ${2:accumulator});
+    """
+  'reducer-in-redux':
+    'prefix': 'reducer-in-redux'
+    'body': """
+      const ${1:name} = (state = ${2:[]}, action) => {
+        switch(action.type){
+          case ${3:'NAME'}:
+            return ///stuff for new state
+          case ${4:'OTHER_NAME'}:
+            return ///stuff for new state
+          default:
+            return state;
+        }
+
+      }
+    """
+  'ref-in-react':
+    'prefix': 'ref-in-react'
+    'body': """
+      ref={(c) => { this.${1:name} = c; }}
+    """
+  'require':
+    'prefix': 'require'
+    'body': """
+      require('$1')
+    """
+  'send-index-html-express':
+    'prefix': 'send-index-html-express'
+    'body': """
+      app.get('/', (request, response) => {
+        response.sendFile(path.join(__dirname, 'public/index.html'));
+      });
+    """
+  'set-port-express':
+    'prefix': 'set-port-express'
+    'body': """
+      app.set('port', process.env.PORT || 3000);
+    """
   'setAttribute': # to set the attribute of an element
     'prefix': 'setAttribute'
     'body': """
@@ -565,7 +943,9 @@
   'setTimeout': # for setTimeout()
     'prefix': 'setTimeout'
     'body': """
-      setTimeout(function() {}, timer, param1, param2);
+      setTimeout(() => {
+        $1
+      }, timer, param1, param2);
     """
   'setup.js': # for setup.js file (testing in enzyme)
     'prefix': 'setup.js'
@@ -596,10 +976,10 @@
           var $ = require('jquery');
         }
     """
-  'sort': # sort function
+  'sort':
     'prefix': 'sort'
     'body': """
-      sort(function (a, b) {return a - b});
+      ${1:array}.sort((a, b) => {return a - b});
     """
   'splice': # splice method to add or remove stuff from arrays
     'prefix': 'splice'
@@ -609,7 +989,7 @@
   'sumArrayItems': # to add up all the numbers in an array
     'prefix': 'sumArrayItems'
     'body': """
-      array.reduce(function (a, b) {
+      ${1:array}.reduce((a, b)=>{
         return a + b;
       }, 0);
     """
@@ -628,7 +1008,14 @@
     """
   'ternary':
     'prefix': 'ternary'
-    'body': 'thing ? ifThingIsTrueDoThis : ifThingIsFalseDoThis'
+    'body': """
+      thing ? ifThingIsTrueDoThis : ifThingIsFalseDoThis
+    """
+  'then-for-promise':
+    'prefix': 'then-for-promise'
+    'body': """
+    then(() => {})
+    """
   'today': # insert the current date in a readable format
     'prefix': 'today'
     'body': 'new Date().toDateString()'
@@ -728,10 +1115,30 @@
 ####################################
 
 '.source.js.jsx': #### for react
+  'action-creator-redux':
+    'prefix': 'action-creator-redux'
+    'body': """
+      export const ${1:actionCreatorName} = ($2) => {
+        return {
+          type: '${3:ACTION_TYPE}',
+        }
+      }
+    """
   'arrow-function': # arrow function for es6
     'prefix': 'arrow-function'
     'body': """
-      ($1)=>{$2}
+      ($1) => { $2 }
+    """
+  'case-in-redux-reducer':
+    'prefix': 'case-in-redux-reducer'
+    'body': """
+      case '${1:ACTION_TYPE}':
+        return $2;
+    """
+  'classList-add-class-vanilla-js':
+    'prefix': 'classList-add-class-vanilla-js'
+    'body': """
+      ${1:element}.classList.add('${2:className}');
     """
   'className':
     'prefix': 'className'
@@ -750,6 +1157,16 @@
     'body': """
       componentWillUnmount() {
         this.serverRequest.abort();
+      }
+    """
+  'constructor-react':
+    'prefix': 'constructor-react'
+    'body': """
+      constructor() {
+        super();
+        this.state = {
+          $1: ${2:''},
+        };
       }
     """
   'export-default-class':
@@ -772,22 +1189,53 @@
       } /
 
     """
+  'filter':
+    'prefix': 'filter'
+    'body': """
+      ${1:array}.filter(($2) => {
+          return $3
+        })
+    """
+  'function-es6':
+    'prefix': 'function-es6'
+    'body': """
+      const ${1:name} = ($2) => {
+        $3
+      }
+    """
   'function-prototype-method-in-react':
     'prefix': 'function-prototype-method-in-react'
     'body': """
-      $1($2){
+      ${1:name}($2) {
         $3
       }
+    """
+  'function-react':
+    'prefix': 'function-react'
+    'body': """
+      ${1:name} = ($2) => {
+        $3
+      }
+    """
+  'get-element-by-id-better':
+    'prefix': 'get-element-by-id-better'
+    'body': """
+      document.getElementById('$1');
+    """
+  'href':
+    'prefix': 'href'
+    'body': """
+      href="$1" target="_blank" rel="noopener noreferrer"
     """
   'import-from-component-react':
     'prefix': 'import-from-component-react'
     'body': """
       import $1 from './$1';
     """
-  'import-react-from-react':
-    'prefix': 'import-react-from-react'
+  'index-route':
+    'prefix': 'index-route'
     'body': """
-      import React, { Component } from 'react';
+      <IndexRoute component={$1}></IndexRoute>
     """
   'items':
     'prefix': 'items'
@@ -796,29 +1244,113 @@
         thingKey: thingValue
       };
     """
+  'JSON.parse':
+    'prefix': 'JSON.parse'
+    'body': """
+      JSON.parse($1)
+    """
+  'link-router':
+    'prefix': 'link-router'
+    'body': """
+      <Link to="/$1">
+        $2
+      </Link>
+    """
+  'localStorage-get-item':
+    'prefix':'localStorage-get-item'
+    'body':'JSON.parse(localStorage.setItem(\'${1:key}\'));${2}'
+  'localStorage-set-item':
+    'prefix':'localStorage-set-item'
+    'body':'localStorage.setItem(\'${1:key}\', JSON.stringify(${2:value}));${3}'
+  'mapDispatchToProps':
+    'prefix': 'mapDispatchToProps'
+    'body': """
+      const mapDispatchToProps = (dispatch) => {
+        return {
+          ${1:propName}: () => {
+            dispatch(${2:actionCreator}())
+          },
+        }
+      }
+    """
+  'mapStateToProps':
+    'prefix': 'mapStateToProps'
+    'body': """
+      const mapStateToProps = (state) => ({
+        state,
+      })
+    """
+  'match-react-router':
+    'prefix': 'match-react-router'
+    'body': """
+      <Match exactly pattern="/" component={${1:Name}} />
+    """
+  'miss-react-router':
+    'prefix': 'miss-react-router'
+    'body': """
+      <Miss component={${1:NotFound}} />
+    """
+  'Object.assign':
+    'prefix': 'Object.assign'
+    'body': """
+      Object.assign(${1:origObject}, { ${2:newProperty}: ${3:newValue} })
+    """
+  'Object.keys':
+    'prefix': 'Object.keys'
+    'body': """
+      Object.keys(${1:objName})
+    """
   'onChange':
     'prefix': 'onChange'
     'body': """
-      onChange={${1:this.props.handleChange}}
+      onChange={${1:($2) => {$3}} }
     """
   'onClick':
     'prefix': 'onClick'
-    'body': 'onClick={${1:this.props.handleClick}}'
+    'body': 'onClick={${1:($2) => {$3}} }'
   'parseInt':
     'prefix': 'parseInt'
     'body': 'parseInt($1, 10)'
+  'prevent-default':
+    'prefix': 'prevent-default'
+    'body': '${1:e}.preventDefault();'
+  'promise':
+    'prefix': 'promise'
+    'body': """
+       const promise = new Promise(function (fulfill, reject) {
+          $1
+         });
+      promise.then($2);
+    """
   'proptypes-react':
     'prefix': 'proptypes-react'
     'body': """
-      $1.propTypes = {
-        $2: React.PropTypes.$3,
+      ${1:Component}.propTypes = {
+        ${2:prop}: React.PropTypes.${3:type},
       }
     """
-  'react-basic-constructor':
-    'prefix':'react-basic-constructor'
+  'query-selector':
+    'prefix': 'query-selector'
     'body': """
-      import React, {Component} from 'react';
-      const ReactDOM = require('react-dom');
+      document.querySelector('$1');
+    """
+  'react-dumb-component':
+    'prefix': 'react-dumb-component'
+    'body': """
+      import React, { Component } from 'react';
+
+      const ${1:name} = ($2) => {
+        return (
+          <div>Hello! This is a test.</div>
+        );
+      }
+
+      export default $1;
+    """
+  'react-smart-component':
+    'prefix':'react-smart-component'
+    'body': """
+      import React, { Component } from 'react';
 
       class $1 extends Component {
 
@@ -833,24 +1365,73 @@
 
       export default $1;
     """
+  'reduce-array':
+    'prefix': 'reduce-array'
+    'body': """
+      ${1:array}.reduce((${3:accum}, ${4:iteratee}) => {
+        return ///
+        }, ${2:accumulator});
+    """
+  'reducer-in-redux':
+    'prefix': 'reducer-in-redux'
+    'body': """
+      const ${1:name} = (state = ${2:[]}, action) => {
+        switch(action.type){
+          case ${3:'NAME'}:
+            return ///stuff for new state
+          case ${4:'OTHER_NAME'}:
+            return ///stuff for new state
+          default:
+            return state;
+        }
+
+      }
+    """
+  'ref-in-react':
+    'prefix': 'ref-in-react'
+    'body': """
+      ref={(c) => { this.${1:name} = c; }}
+    """
   'render-react':
     'prefix': 'render-react'
     'body': """
       render() {
         return(
-          <div>Hi</div>
+          <div>$1</div>
         );
       }
+    """
+  'return-react':
+    'prefix': 'return-react'
+    'body': """
+      return(
+        <div>$1</div>
+      );
+    """
+  'route-for-router':
+    'prefix': 'route-for-router'
+    'body': """
+      <Route path="/$1" component={$2} />
     """
   'setState':
     'prefix': 'setState'
     'body': """
-      this.setState({${1:key}:${2:value}});
+      this.setState({ ${1:key}: ${2:value} });
+    """
+  'sort':
+    'prefix': 'sort'
+    'body': """
+      ${1:array}.sort((a, b) => {return a - b});
     """
   'test':
     'prefix': 'test'
     'body': """
       console.log("test");
+    """
+  'then-for-promise':
+    'prefix': 'then-for-promise'
+    'body': """
+    then(() => {})
     """
 #####################################
 
@@ -1070,11 +1651,23 @@
       }
 
     """
+  'rgba-better':
+    'prefix': 'rgba-better'
+    'body': """
+      rgba(${1:0}, ${2:0}, ${3:0}, ${4:0})
+    """
   'sanity-check':
     'prefix': 'sanity-check'
     'body': """
       background-color: magenta;
       color: magenta;
+    """
+  'selector':
+    'prefix': 'selector'
+    'body': """
+      ${1:element} {
+        $2
+      }
     """
   'smartphone': # media query for smartphone
     'prefix': 'smartphone'
@@ -1119,4 +1712,46 @@
         top: 50%;
         transform: translateY(-50%);
       }
+    """
+'.text.html.mustache': ##for hbs HTML Mustache documents
+  'each-ember':
+    'prefix': 'each-ember'
+    'body': """
+      {{#each model as |$1|}}
+
+      {{/each}}
+    """
+  'handlebars-basic':
+    'prefix': 'handlebars-basic'
+    'body': '{{$1}}'
+  'if-ember':
+    'prefix': 'if-ember'
+    'body': """
+      {{#if $1}}
+        $2
+      {{else}}
+        $3
+      {{/if}}
+    """
+  'link-ember':
+    'prefix': 'link-ember'
+    'body': """
+      {{#link-to $1}}
+        $2
+      {{/link-to}}
+    """
+  'with-ember':
+    'prefix': 'with-ember'
+    'body': """
+      {{#with ${1:model} as |${2:thing}|}}
+        $3
+      {{/with}}
+    """
+'.source.ts': ## for TypeScript
+  'component-decorator':
+    'prefix': 'component-decorator'
+    'body': """
+      @Component({
+        selector: '${1:name}',
+      })
     """
